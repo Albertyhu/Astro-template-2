@@ -1,0 +1,26 @@
+.fadeInUp {
+	transition: transform 1s ease;
+	animation: fadeUp 1s ease;
+	animation-fill-mode: forwards;
+}
+
+.animation-delay-1 {
+	animation-delay: 300ms;
+}
+.animation-delay-2 {
+	animation-delay: 600ms;
+}
+
+#TitleSection {
+	font-family: 'Prata';
+}
+@keyframes fadeUp {
+	0% {
+		transform: translateY(100px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0px);
+		opacity: 1;
+	}
+}

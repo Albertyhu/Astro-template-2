@@ -1,0 +1,19 @@
+---
+const { 
+    image,
+    altText,
+    customStyle, 
+    } = Astro.props; 
+---
+<div
+    id = "image-component"
+    class ={customStyle ? customStyle : "h-auto w-11/12 mx-auto md:h-[370px] md:w-[370px] overflow-hidden rounded-lg grow-[3]"} 
+>
+    <img 
+    loading = "lazy"
+    decoding="async"
+    src = {image.src} 
+    alt = {altText ? altText : "projectimage"}  
+    class = "object-cover w-full h-full"
+    />
+</div>

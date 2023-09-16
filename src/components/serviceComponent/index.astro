@@ -1,0 +1,48 @@
+---
+import "./service-style.css"; 
+import ServiceBlock from './service-block.astro'; 
+import LeftLeaf from '@/assets/images/shape/shape-35.png';
+import RightLeaf from '@/assets/images/shape/shape-34.png'
+import type { ServiceType } from "@/util/interface";
+const {
+    serviceList, 
+    title,
+    subtitle
+    } = Astro.props;  
+---
+<section class="service-section relative p-[100px_0px_150px_0px] text-center">
+    <div class="auto-container">
+        <img 
+        loading = "lazy"
+        decoding="async"
+        src = {LeftLeaf.src}
+        alt = "left leaf"
+        class ="hidden sm:block absolute left-0 right-auto z-0 sm:w-[150px] h-auto"
+        />
+        <img 
+        loading = "lazy"
+        decoding="async"
+        src = {RightLeaf.src}
+        alt = "right leaf"
+        class ="hidden sm:block absolute right-0 left-auto z-0 sm:w-[150px] h-auto"
+        />
+        <div class="sec-title mb-[35px]">
+            {title && 
+                <span class="sub-title">{title}</span>     
+            }
+            <h2>What Kind of Services <br />We are Offering</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 h-fit">
+            {serviceList && serviceList.length > 0 &&
+                serviceList.map((service: ServiceType) =>
+                    <ServiceBlock 
+                        thumbnail = {service.thumbnail}
+                        title = {service.title}
+                        tagline = {service.tagline}
+                        link = {service.link}
+                    />
+                )
+            }      
+        </div>
+    </div>
+</section>

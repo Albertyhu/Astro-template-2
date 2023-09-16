@@ -1,0 +1,100 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import TagList from "@/components/taglist/taglist.astro";
+import RecentPosts from '@/components/blogComponents/recent_post/index.astro';
+import {
+    formatRecentPostArray,
+    setBlogPostImages, 
+} from "@/hooks/blogHooks.ts"; 
+import type { 
+    PostType,
+    PostAssetType,
+    formattedPostType,
+ } from "@/util/interface.tsx"; 
+import SearchComponent from '@/components/search/index.astro';
+const { frontmatter } = Astro.props;
+const tags = frontmatter.tags; 
+var assets : Array<PostAssetType> = [];  
+try{
+    assets = await Astro.glob("../assets/uploads/*")
+    } catch(e){
+}
+var FeaturedImage = null; 
+
+var allPosts : Array<PostType> = []; 
+try {
+    allPosts = await Astro.glob("../pages/posts/*.md"); 
+} catch(error){
+    console.log("error: ", error)
+}
+var formattedRecentPosts : Array<formattedPostType> = []
+var recentPosts: Array<formattedPostType> = []; 
+if(allPosts && allPosts.length > 0){
+    recentPosts = formatRecentPostArray(allPosts, 3)
+}
+var payload = setBlogPostImages(assets, frontmatter.featured_image, recentPosts)
+FeaturedImage = payload.main_featured_image; 
+formattedRecentPosts = [...payload.recentPosts]
+
+const formattedDate = new Date(frontmatter.pubDate)
+---
+<BaseLayout 
+    pateTitle={frontmatter.title} 
+    {frontmatter}
+    customDescription = {frontmatter.description}
+    >
+    <div 
+        class = "flex flex-col lg:flex-row sm:gap-10 mt-5 w-11/12 mx-auto"
+    > 
+        <div
+            class = ""
+        >
+            {FeaturedImage &&
+                <div
+                    id="FeaturedImage"
+                    class ="max-h-[500px] w-full overflow-hidden justify-center mb-10"
+                >
+                    <img
+                        loading = "lazy"
+                        decoding="async"                     
+                        src ={FeaturedImage} 
+                        class = "w-full h-full object-cover" />
+                </div>
+            }
+            {frontmatter.pubDate && 
+                <p
+                    class = "relative block text-[15px] mb-[2px] text-slate-400"
+                >{formattedDate.toLocaleDateString()}</p>
+            }
+            <h1 class="text-2xl font-bold">{frontmatter.title}</h1>
+            <p>Written by <a 
+                href ={`/authors/${frontmatter.author}`}
+                class = "hover:underline cursor-pointer"
+                ><b>{frontmatter.author}</b></a></p>
+            <hr class="border-2 bg-black w-full my-5" />
+            <slot />
+            {tags && tags.length > 0 &&
+            <div class = "mt-10">
+                <h3
+                    class ="font-bold text-base"
+                >Tags: </h3>
+                <TagList tags = {tags} />
+            </div>
+            }
+        </div>
+        <div class = "flex flex-col min-w-[33.33%]">
+            <SearchComponent 
+                {allPosts}
+            />
+            <RecentPosts 
+                posts = {formattedRecentPosts}
+             />
+        </div>
+    </div>  
+</BaseLayout>
+<script define:vars={{
+        featured_image: frontmatter.featured_image,
+        assets: assets,
+        }}>
+
+</script>

@@ -1,0 +1,105 @@
+---
+import CreatorComponent from '../creatorComponent.astro';
+import siteData from '../../customization/siteData.json'; 
+import './footer_style.css'
+import FooterColumn from './footer-column.astro'; 
+import type { FooterColumnType} from '../../util/interface.tsx';
+import Contacts from './contacts.astro'; 
+import ColumnLabel from './column_label.astro';
+import BannerImage from '@/assets/images/banner/los-angeles-mountains-scaled.webp';
+import FooterLogo from '@/assets/logo/white-logo.svg'
+import Shape13 from '@/assets/images/shape/shape-13.png'; 
+
+const {
+    columns,
+    CTA_Banner
+} = Astro.props;
+
+var YEAR = new Date().getFullYear(); 
+---
+<footer class="main_footer relative">
+    <div class="footer-logo relative block pb-[50px] text-center bg-[#1d4a34]">
+        {CTA_Banner && 
+            <section 
+                class="cta-section relative pt-[140px] pb-[140px]" 
+                style={{backgroundImage: `url(${BannerImage.src})`}}
+                >
+                <div class="auto-container">
+                    <div class="relative flex flex-col gap-1 sm:flex-row clearfix justify-between">
+                        <div class="sec-title light float-left">
+                            <span class="sub-title">Have an idea for a project?</span>
+                            <h2
+                                class=""
+                            >Get in touch with us</h2>
+                        </div>
+                        <div class="btn-box float-right mt-[50px] sm:whitespace-nowrap">
+                            <a href="/contact" class="theme-btn btn-one">Make an appointment<i class="far fa-long-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        <figure class="logo relative inline-block bg-[#1d4a34]">
+            <div 
+                class="shape absolute bg-transparent !z-[1] max-w-[280px] [@media(min-width:290px)]:max-w-none"
+                style=`background-image: url(${Shape13.src})`
+                >
+            </div>
+            <a 
+                href="/"
+               class="!z-10 relative"
+                >
+                <img 
+                    src={FooterLogo.src} 
+                    alt="footer logo"
+                >
+            </a>
+        </figure>
+    </div>
+    <div class="widget-section relative pt-[65px] pb-[70px] bg-[#1d4a34]">
+        <div class="auto-container">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[30px]">
+                <div class="footer-column">
+                    <div class="footer-widget about-widget">
+                        <div class="widget-title relative block mb-[25px]">
+                            <ColumnLabel label ="About" />
+                        </div>
+                        <div class="widget-content">
+                            <div class="text relative block mb-[30px]">
+                                <p>At Natural Patterns, every project begins with a conversation – a journey into your aspirations and desires. We believe that your vision is the heart of our inspiration. Our team of dedicated artisans and landscaping experts works hand in hand with you to understand your needs, preferences, and the unique characteristics of your space.</p>
+                            </div>
+                            <ul class="social-links clearfix">
+                                <li class="relative inline-block mr-[10px]"><a href="https://www.facebook.com" class="block color_white hover:bg hover:bg-[#FFFFFF1A] rounded-lg"><i class="fab fa-facebook-f"></i></a></li>
+                                <li class="relative inline-block mr-[10px]"><a href="https://www.twitter.com" class="block color_white hover:bg hover:bg-[#FFFFFF1A] rounded-lg"><i class="fab fa-twitter"></i></a></li>
+                                <li class="relative inline-block mr-[10px]"><a href="https://www.vimeo.com" class="block color_white hover:bg hover:bg-[#FFFFFF1A] rounded-lg"><i class="fab fa-vimeo-v"></i></a></li>
+                                <li class="relative inline-block"><a href="https://www.google.com" class="block color_white hover:bg hover:bg-[#FFFFFF1A] rounded-lg"><i class="fab fa-google-plus-g"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {columns && columns.length > 0 && 
+                    columns.map((column: FooterColumnType, index: number) => <FooterColumn {...column} key ={`footer-column-${index}`} />)                    
+                }
+                <Contacts />
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom pt-[30px] pb-[30px]">
+        <div class="auto-container">
+            <div class="grid">
+                <div class="w-full min-h-[20px] text-slate-300 text-center relative">
+                    <div>
+                        <span id = "WebsiteName">{siteData.business_name}</span> &copy;
+                        <span id = "CopyRight">{YEAR}</span>
+                    </div>
+                    <ul class="">
+                        <li class="inline-block mr-[30px]"><a href="index.html" class="text-[15px]">Terms of Service</a></li>
+                        <li class="inline-block"><a href="index.html" class="text-[15px]">Privacy Policy</a></li>
+                    </ul>
+                    <CreatorComponent customStyle = "sm:absolute sm:right-[10px] sm:top-0" />
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+

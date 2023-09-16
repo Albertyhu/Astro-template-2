@@ -1,0 +1,70 @@
+---
+//This component renders the thumbnail, title of a blog post that links to the actual post
+import TagList  from './tagList.astro'
+
+const {
+    title,
+    author, 
+    description,
+    thumbnail,
+    featured_image,
+    pubDate,
+    tags, 
+    url
+} = Astro.props; 
+
+import DescriptionComponent from './description.tsx'; 
+let datePublished : Date | null = pubDate ? new Date(pubDate)  : null; 
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+import "./style.css"; 
+---
+<div
+    class = "rounded-lg post-box-shadow bg-white blog-preview-panel mb-[20px]"
+>
+    {thumbnail &&
+        <div
+        class = "overflow-hidden cursor-pointer h-[250px] w-auto rounded-[5px_5px_0px_0px]"
+        >
+            <a 
+                href={url}
+            >
+                <img
+                    loading = "lazy"
+                    decoding="async"
+                    src = {thumbnail}
+                    alt = {`${title} featured image`}
+                    class = "w-full h-full object-cover"
+                />
+            </a>
+        </div>
+        
+    }
+    <div
+        class = "w-9/12 mx-auto py-10"
+    >
+    {datePublished &&
+        <div
+            class="text-[#7a7b80]"
+        >{datePublished.toLocaleDateString()}</div>
+    }
+    {title && 
+        <a 
+            href={url} 
+            class = "cursor-pointer text-2xl"
+            ><h2 class = "font-bold">{title}</h2></a>
+    }
+    <p>
+    {author &&
+        <span
+        class = "font-bold"
+        >Published by <b>{author}</b></span>
+    } 
+    </p>
+    {description &&
+        <DescriptionComponent {description} client:visible />
+    }
+    {tags && tags.length > 0 &&
+        <TagList tags = {tags} />
+    }   
+    </div>
+</div>

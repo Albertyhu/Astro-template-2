@@ -1,0 +1,23 @@
+---
+import type { FooterLinkType } from '@/util/interface.tsx';
+import ColumnLabel from './column_label.astro'; 
+const { 
+    label,
+    links, 
+ } = Astro.props; 
+---
+<div class="footer-column text-left">
+    <div class="footer-widget links-widget">
+        <div class="widget-title relative block mb-[25px]">
+            <ColumnLabel label = {label} />
+        </div>
+        <div class="widget-content">
+            <ul class="links-list clearfix">
+                {links && links.length > 0 && 
+                    links.map((item : FooterLinkType, index: number) =>
+                                <li class="relative block mb-[7px]"><a href={item.link} class="relative text-lg inline-block !text-base">{item.label}</a></li>
+                    )
+                }
+            </ul>
+        </div>
+    </div>

@@ -1,0 +1,45 @@
+---
+import SocialLinks from "../../social-links.astro";
+import MenuLinks from "./menuLinks.tsx";
+import WhiteLogo from "@/assets/logo/white-logo.svg"; 
+import SiteData from "@/customization/siteData.json"; 
+---
+<div
+    id="mobile-menu"
+    class="grid h-full fixed left-auto right-0 top-0 overflow-y-auto overflow-x-hidden w-[250px] z-[999] bg-black mobile-menu-close"
+>
+    <div id = "close-btn" class="h-fit"><i class="fas fa-times close-btn"></i></div>
+    <nav class="">
+        <div class="nav-logo w-10/12 mx-auto userselect-none">
+            <a href="../../../">
+                <img 
+                    loading = "lazy"
+                    decoding="async"
+                    src={WhiteLogo.src} 
+                    alt="Logo"
+                    class="h-full w-full"
+                    >
+            </a>
+        </div>
+        <div class="menu-outer mt-[25px]">
+            <MenuLinks client:visible />
+        </div>
+        <div class="contact-info text-white pl-[25px] border-t-[1px] border-[#d6d6d6]">
+            <h4>Contact Info</h4>
+            <ul>
+                {SiteData && SiteData.address && <li>{SiteData.address},</li>}
+                {SiteData && (SiteData.city || SiteData.state || SiteData.country || SiteData.zip) &&
+                    <li> 
+                        {SiteData.city && <span>{SiteData.city},</span>} 
+                        {SiteData.state && <span>{SiteData.state},</span>} 
+                        {SiteData.country && <span>{SiteData.country}</span>}
+                        {SiteData.zip && <span>{SiteData.zip}</span>}
+                    </li>
+                }
+                {SiteData && SiteData.business_phone && <li><a href="tel:+8801682648101">{SiteData.business_phone}</a></li>}
+                {SiteData && SiteData.business_email && <li><a href={`mailto:${SiteData.business_email}`}>{SiteData.business_email}</a></li>}
+            </ul>
+        </div>
+        <SocialLinks customStyle = "clearfix flex flex-row [&>li]:mr-5 [&>li>a>span]:text-white my-10 pl-[25px]"/>
+    </nav>
+</div>

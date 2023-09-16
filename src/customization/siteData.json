@@ -1,0 +1,24 @@
+{
+	"title": "template site",
+	"business_name": "Natural Patterns Landscaping",
+	"description": "Transforming Spaces with Nature's Elegance | Natural Patterns Landscaping",
+	"year_founded": 1997, 
+	"owner_name": "TheLastSliceOfPizza",
+	"owner_email": "hualbert@rocketmail.com",
+	"address": "Chicago 13",
+	"city": "Melborne City",
+	"state": "FL",
+	"country": "United States",
+	"zip": "94511",
+	"business_email": "uthan@example.com",
+	"business_phone": "(915)365-1515",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"facebook": "https://www.facebook.com",
+	"twitter": "https://www.x.com",
+	"pinterest": "https://www.pinterest.com",
+	"instagram": "https://www.instagram.com",
+	"youtube": "https://www.youtube.com"
+}

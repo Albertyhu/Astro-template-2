@@ -1,0 +1,86 @@
+---
+export const prerender = false; 
+import EmailIcon from "./iconComponents/email.astro";
+const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`;
+import { MessageArray } from "@/util/atomItems";
+---
+<form 
+    method="POST"
+    class="formBackground w-11/12 md:w-9/12 mx-auto lg:w-6/12 rounded-lg mt-[45px] py-10 box_shadow mb-[120px] sm:mb-[160px] z-[1]"
+    id = "contactForm"
+>
+    <div
+        id="Shell"
+        class={`w-11/12 mx-auto ${FormStyle}`}
+        >
+            <div class = "grid sm:flex">
+                <EmailIcon customStyle = "mx-auto mb-5 bg-[#2F7955] text-white" />
+                <section 
+                    class = "mx-auto sm:ml-[5px]"
+                >
+                    <h2 class ="text-base sm:text-2xl text-center sm:text-left font-bold my-1">Have something to say?</h2>
+                    <h2 class ="text-base sm:text-2xl text-center sm:text-left my-1">Share your thoughts.</h2>
+                </section>
+            </div>
+            <div class = "grid w-full my-[10px]">
+                <label class ="formLabel">Email</label>
+                <input 
+                    name="email"
+                    id="emailInput"
+                    type="email"
+                    class = "formInput"
+                    placeholder="Type your email here"
+                    required
+                />
+            </div>
+            <div class = "grid w-full my-[10px]">
+                <label class ="formLabel">Subject Line</label>
+                <input 
+                    name="subject"
+                    id="subjectInput"
+                    type="text"
+                    class = "formInput"
+                    placeholder="Type your subject line here"
+                    required
+                />
+            </div>
+            <div class = "grid w-full my-[10px]">
+                <label class ="formLabel">Message</label>
+                <textarea
+                    name="message"
+                    id="messageInput"
+                    rows="5"
+                    class ="outline-1 border-2 border-solid border-slate-200 resize-none p-1 rounded-lg bg-transparent placeholder:text-base placeholder:text-slate-800"  
+                    placeholder="Type your message here."
+                ></textarea>
+            </div>
+            <button
+                class = "fancyButton !ml-auto !mr-0 bg-slate-300"
+                type="submit"
+            >Send</button>
+    </div>
+</form>
+<script>import { MessageArray } from "@/util/atomItems";
+
+    const HandleSubmit = async (data : any)  =>{
+        const formData = new FormData(data); 
+        const fetchURL  =`/api/contact_form`; 
+        const res = await fetch(fetchURL, {
+            method: "POST",
+            body: formData, 
+        })
+        const result = await res.json(); 
+        if(res.ok){
+             window.location.href = "/message_sent"
+        }
+        if(result.error){
+            console.log(result.error); 
+        }
+    }
+
+    const ContactForm = document.getElementById("contactForm"); 
+    ContactForm?.addEventListener("submit", (evt)=>{
+        evt.preventDefault(); 
+        HandleSubmit(evt.target)
+    })
+</script>

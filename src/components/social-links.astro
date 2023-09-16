@@ -1,0 +1,17 @@
+---
+const {customStyle} = Astro.props; 
+import SiteData from "@/customization/siteData.json"; 
+const { followUsText } = Astro.props; 
+---
+
+
+<div class={`${customStyle ? customStyle : "grid sm:flex sm:flex-row"}`}>
+    {followUsText && <div><p>Follow Us:</p></div>}
+    <div class="text-white sm:ml-5 [&>div]:mr-5 flex">
+        {SiteData.twitter && <div><a href={SiteData.twitter}><span class="fab fa-twitter"></span></a></div>}
+        {SiteData.facebook && <div><a href={SiteData.facebook}><span class="fab fa-facebook-square"></span></a></div>}
+        {SiteData.pinterest && <div><a href={SiteData.pinterest}><span class="fab fa-pinterest-p"></span></a></div>}
+        {SiteData.instagram && <div><a href={SiteData.instagram}><span class="fab fa-instagram"></span></a></div>}
+        {SiteData.youtube && <div><a href={SiteData.youtube}><span class="fab fa-youtube"></span></a></div>}    
+    </div>
+</div>

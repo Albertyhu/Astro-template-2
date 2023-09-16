@@ -1,0 +1,73 @@
+.icon_overlay:before {
+	position: absolute;
+	content: '';
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	transform: scale(0, 0);
+	z-index: -1;
+	transition: all 500ms ease;
+}
+
+.icon_overlay:before {
+	background-color: #2f7955;
+}
+
+.service-block-one .inner-box .icon-block {
+	overflow: hidden;
+	width: 70px;
+	height: 70px;
+	line-height: 70px;
+	background: #eaf1ee;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: -46px;
+}
+
+.service-block-one .inner-box:hover .icon-block {
+	color: #fff;
+}
+
+.service-block-one .inner-box:hover .link-btn {
+	display: hidden;
+}
+.img_hover_1 {
+	position: relative;
+	overflow: hidden;
+}
+.img_hover_1::before {
+	width: 100%;
+	transition: all 300ms ease;
+}
+
+.img_hover_1::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 0;
+	display: block;
+	content: '';
+	width: 0;
+	height: 0;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 0%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+
+.img_hover_1:hover::before {
+	-webkit-animation: circle 0.95s;
+	animation: circle 0.95s;
+}
+
+.service-block-one .inner-box:hover .img_hover_1::before {
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+}
+
+.box_shadow{
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

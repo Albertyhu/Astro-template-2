@@ -1,0 +1,81 @@
+.header_top {
+	position: relative;
+	width: 100%;
+	padding: 14px 0px 30px 0px;
+}
+
+.header_top .shape {
+	position: absolute;
+	left: 40%;
+	bottom: 0px;
+	width: 76px;
+	height: 41px;
+	background-repeat: no-repeat;
+}
+
+.header_top .social-links li {
+	position: relative;
+	display: inline-block;
+	float: left;
+	margin-right: 25px;
+}
+
+.header_top .social-links li:last-child {
+	margin: 0px !important;
+}
+
+.header_top .social-links li a {
+	font-size: 14px;
+}
+
+.header_top a {
+	display: inline-block;
+	color: #fff;
+}
+
+.header_top p {
+	font-size: 16px;
+	color: #fff;
+}
+
+.header_top .info-box li {
+	position: relative;
+	display: inline-block;
+	float: left;
+	margin-right: 60px;
+	padding-left: 25px;
+}
+
+.header_top .info-box li:last-child {
+	margin: 0px !important;
+}
+
+.header_top .info-box li a:hover {
+	text-decoration: underline;
+}
+
+.header_top .info-box li .icon-box {
+	position: absolute;
+	left: 0px;
+	top: 4px;
+	font-size: 16px;
+	color: #fff;
+}
+
+.header_top .info-box li:before {
+	position: absolute;
+	content: '';
+	background-color: rgba(255, 255, 255, 0.2);
+	width: 1px;
+	height: 20px;
+	top: 4px;
+	right: -30px;
+}
+
+.header_top .info-box li:last-child:before {
+	display: none;
+}
+
+.box_shadow {
+	box-shadow: 0px 25px 15px 0px rgba(0,0,0,0.1);
+}

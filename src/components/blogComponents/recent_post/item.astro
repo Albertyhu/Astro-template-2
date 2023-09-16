@@ -1,0 +1,31 @@
+
+---
+import './style.css'
+const {
+    featured_image,
+    title, 
+    pubDate, 
+    url
+} = Astro.props; 
+const formattedDate = new Date(pubDate); 
+---
+<a href = {url}>
+<div class="flex flex-row gap-5 relative min-h-[100px] text-[16px] my-5 ">
+        <div>
+        {featured_image && 
+            <figure class="rounded-lg overflow-hidden w-[80px] h-[80px]">
+                <img 
+                src={featured_image} 
+                alt="featured_image image"
+                class="w-full h-full object-cover" />
+            </figure>
+        }
+        </div>
+        <div class = "grid">
+            <h5 class="text-lg font-medium mb-[6px]">{title}</h5>
+            <span class="post-date relative block text-xl leading-[28px]">{formattedDate.toDateString()}</span>
+        </div>
+
+</div>
+</a>
+

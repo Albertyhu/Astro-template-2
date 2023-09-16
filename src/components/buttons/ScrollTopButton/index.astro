@@ -1,0 +1,31 @@
+---
+//note: This component requires tagging hero sections of webpage with the class name "scrollTotopIndicator"
+//The logic for making the button appear and disappear will be located in the layout file
+//This component needs to be suppledmented by BaseLayout in order to work 
+import { Icon } from 'astro-icon'
+import "./style.css"; 
+---
+<div
+    id="ScrollTopButton"
+    class ="ScrollTopButton w-[3rem] h-[3rem] rounded-full fixed bottom-[6rem] right-[2rem] z-20 cursor-pointer block w-fit userselect-none transition-all duration-1000 buttonHidden invisible bg-[#2f7955]" 
+>
+<Icon 
+    class = "mx-auto w-[3rem] h-[3rem] userselect-none text-[#dbdbdb]"
+    name="ic:sharp-arrow-circle-up" />
+</div>
+<script is:inline>
+    const indicator = document.querySelector(".scrollToTopIndicator"); 
+    const ScrollTopButton = document.querySelector("#ScrollTopButton");
+    ScrollTopButton?.addEventListener("mousedown", ()=>window.scrollTo({top: 0,left: 0,behavior: "smooth",}))
+    const ButtonScrollEvent = (evt) =>{
+        if(indicator.getBoundingClientRect().top  < 0){
+            ScrollTopButton?.classList.remove("invisible")
+            ScrollTopButton?.classList.remove("buttonHidden");
+        }
+        else{
+            ScrollTopButton?.classList.add("invisible")
+            ScrollTopButton?.classList.add("buttonHidden");                   
+        }
+    }
+    window.addEventListener("scroll", ButtonScrollEvent)
+</script>
